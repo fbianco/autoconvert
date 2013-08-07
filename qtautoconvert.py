@@ -552,8 +552,9 @@ Options:
         configLayout.addRow(_tr('Image format'), self.gwyexportFormat)
 
         self.gwyexportGradient = Qt.QComboBox()
-        self.gwyexportGradient.addItems(Qt.QStringList(('gold',
-                'gray', 'gwyddion', 'rust', 'warm', 'wrappmono', 'blue')))
+        self.gwyexportGradient.addItems(Qt.QStringList(('Gold',
+                'Gray', 'Gwyddion.net', 'Rust', 'Warm', 'Wrapp-mono', 'Blue',
+                'Spectral')))
         configLayout.addRow(_tr('Color gradient'), self.gwyexportGradient)
         
         self.gwyexportColormap = Qt.QComboBox()
@@ -676,7 +677,7 @@ Specifies filters applied to each image.
             settings.value("gwyexportFormat", Qt.QVariant('jpg')).toString()))
         self.gwyexportGradient.setCurrentIndex(
             self.gwyexportGradient.findText(
-                settings.value("gwyexportGradient", Qt.QVariant('wrappmono')
+                settings.value("gwyexportGradient", Qt.QVariant('wrapp-mono')
                                 ).toString()))
         self.gwyexportColormap.setCurrentIndex(
             self.gwyexportColormap.findText(
