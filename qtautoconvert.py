@@ -543,8 +543,8 @@ Options:
                              respective mapping to colors. Default is
                              `adaptive'.
         """))
-        configLayout.addRow(_tr('Gwyconvert command path'), self.gwyexportCmd)
-        configLayout.addRow(_tr('Gwyconvert flags'), self.gwyexportFlags)
+        configLayout.addRow(_tr('Gwyexport command path'), self.gwyexportCmd)
+        configLayout.addRow(_tr('Gwyexport flags'), self.gwyexportFlags)
 
 
         self.gwyexportFormat = Qt.QComboBox()
@@ -741,11 +741,11 @@ Specifies filters applied to each image.
 
         
     def startConvert(self):
-        # since Vernissage might be blocking for Gwyconvert, we create
+        # since Vernissage might be blocking for Gwyexport, we create
         # two queue for the different process and start them sequentially
         maxProcesses = self.maxProcesses.value()
         self.processesQueue1 = ProcessesQueue(maxProcesses) # for vernissage
-        self.processesQueue2 = ProcessesQueue(maxProcesses) # for Gwyconvert
+        self.processesQueue2 = ProcessesQueue(maxProcesses) # for Gwyexport
 
         self.startButton.setEnabled(False)
         self.startAct.setEnabled(False)
@@ -832,7 +832,7 @@ Specifies filters applied to each image.
             self.createProcess(args, 'Vernissage', path, workingDirectory=path)
 
 
-        if self.exportImage.isChecked(): # Do Gwyconvert
+        if self.exportImage.isChecked(): # Do Gwyexport
             if debug: print 'Export images'
             iofpath = os.path.normpath(
                             os.path.join(self.iofpath, currentFolder))
@@ -865,7 +865,7 @@ Specifies filters applied to each image.
                  '{colormap}': unicode(self.gwyexportColormap.currentText()),
                  '{inputfolder}': path,
                 })
-            self.createProcess(args, 'Gwyconvert', path )
+            self.createProcess(args, 'Gwyexport', path )
 
     def createProcess(self, args, name, folder, workingDirectory=None):
 
@@ -958,7 +958,7 @@ Specifies filters applied to each image.
 
         if 'Vernissage' == name:
             self.processesQueue1.append(process)
-        elif 'Gwyconvert' == name:
+        elif 'Gwyexport' == name:
             self.processesQueue2.append(process)
         else: # should never occur
             self.processesQueue1.append(process)
